@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Diagnosa Demam Berdarah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #007BFF;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            font-size: 22px;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            flex: 1;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .gejala-item {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+        .gejala-item label {
+            flex: 1;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+        select {
+            width: 200px;
+            padding: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h1>Pilih Gejala</h1>
+            <form action="/submit" method="POST">
+                {% for gejala in gejala_list %}
+                    <div class="gejala-item">
+                        <label for="dropdown_{{ gejala[0] }}">{{ gejala[1] }}</label>
+                        <select id="dropdown_{{ gejala[0] }}" name="cf_user[{{ gejala[0] }}]">
+                            <option value="0.0" selected>Tidak</option>
+                            <option value="0.2">Tidak tahu</option>
+                            <option value="0.4">Sedikit Yakin</option>
+                            <option value="0.6">Cukup Yakin</option>
+                            <option value="0.8">Yakin</option>
+                            <option value="1.0">Sangat Yakin</option>
+                        </select>
+                    </div>
+                {% endfor %}
+                <button type="submit">Submit Diagnosa</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
