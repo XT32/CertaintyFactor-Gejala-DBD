@@ -6,9 +6,9 @@ app = Flask(__name__)
 # MySQL Database Configuration
 db_config = {
     'host': '192.168.1.39',
-    'port': '3307',    # Server MySQL, bisa localhost atau IP address
-    'user': 'xt',      # Username MySQL Anda
-    'password': 'adminxt', # Password MySQL Anda
+    'port': '3307',    # Server MySQL, localhost atau IP address
+    'user': 'xt',      # Username MySQL
+    'password': 'adminxt', # Password MySQL
     'database': 'simpak'   # Nama database yang sudah dibuat
 }
 
