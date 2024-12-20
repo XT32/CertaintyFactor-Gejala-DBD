@@ -1,30 +1,37 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
 
 app = Flask(__name__)
 
 # MySQL Database Configuration
 db_config = {
-    'host': '192.168.1.39',
+    'host': 'localhost',
     'port': '3307',
-    'user': 'xt',
+    'user': 'root',
     'password': 'adminxt',
     'database': 'simpak'
 }
 
+# Fungsi untuk menghubungkan ke database
 def connect_db():
     return mysql.connector.connect(**db_config)
 
+# Halaman utama
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+# Halaman diagnosa
+@app.route('/diagnos')
+def diagnos():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("SELECT id_gejala, symptom_name FROM gejala")
     gejala_list = cursor.fetchall()
     conn.close()
-    
-    return render_template('index.html', gejala_list=gejala_list)
+    return render_template('diagnos.html', gejala_list=gejala_list)
 
+# Proses pengiriman data diagnosa
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
@@ -39,7 +46,7 @@ def submit():
         cf_user_values = []
         for gejala_id in gejala_ids:
             cf_user_value = request.form.get(f'cf_user[{gejala_id}]', 0)
-            cf_user_values.append(float(cf_user_value))
+            cf_user_values.append(float(cf_user_value))  # Mengubah menjadi float
         
         # Koneksi ke database untuk mengambil nilai CF expert
         conn = connect_db()
@@ -53,7 +60,6 @@ def submit():
                 cf_expert = result[0]
                 cf_user = cf_user_values[i]
                 combined_cf = cf_expert * cf_user
-                print(combined_cf)
                 combined_cf_list.append(combined_cf)  # Simpan setiap hasil perkalian ke dalam daftar
         
         conn.close()
@@ -70,7 +76,7 @@ def submit():
             # Hasil akhir diambil dari nilai terakhir `c_old` dan dikali 100%
             total_bobot = c_old * 100
         else:
-            total_bobot = 0  # Default jika tidak ada gejala yang dipilih atau dihitung
+            total_bobot = 0
 
         # Narasi berdasarkan total_bobot
         if total_bobot < 30:

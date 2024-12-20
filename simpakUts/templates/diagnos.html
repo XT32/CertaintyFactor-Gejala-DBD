@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Diagnosa Demam Berdarah</title>
-    <link rel="stylesheet" href="/simpakUts/static/diagnos.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='diagnos.css') }}">
 </head>
+
 <body>
     <div class="content">
         <div class="container">
             <h1>Pilih Gejala</h1>
-            <form action="/submit" method="POST">
+            <form action="{{ url_for('submit') }}" method="POST">
                 {% for gejala in gejala_list %}
                     <div class="gejala-item">
                         <label for="dropdown_{{ gejala[0] }}">{{ gejala[1] }}</label>
@@ -29,4 +31,5 @@
         </div>
     </div>
 </body>
+
 </html>
