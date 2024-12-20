@@ -9,6 +9,16 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="{{ url_for('diagnos') }}">Diagnosis</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
     <div class="content">
         <div class="container">
             <h1>Pilih Gejala</h1>
@@ -28,6 +38,8 @@
                 {% endfor %}
                 <button type="submit">Submit Diagnosa</button>
             </form>
+            <!-- Tombol Kembali -->
+            <a href="{{ url_for('index') }}" class="btn-back">Kembali ke Halaman Utama</a>
         </div>
     </div>
 </body>

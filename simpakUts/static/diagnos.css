@@ -3,41 +3,46 @@ body {
     margin: 0;
     background-color: #f4f4f4;
     display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
-.sidebar {
-    width: 250px;
+/* Navbar Styling */
+.navbar {
     background-color: #007BFF;
-    color: white;
-    padding-top: 20px;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style: none;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar h2 {
+    justify-content: center;
     margin: 0;
-    padding: 10px;
-    text-align: center;
-    font-size: 22px;
+    padding: 0;
 }
 
-.sidebar a {
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
     text-decoration: none;
     color: white;
-    padding: 15px;
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
 }
 
-.sidebar a:hover {
+.navbar a:hover {
     background-color: #0056b3;
 }
 
+/* Content Styling */
 .content {
     flex: 1;
     padding: 30px;
@@ -90,4 +95,20 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Back Button Styling */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-back:hover {
+    background-color: darkorange;
 }
