@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Diagnosa Demam Berdarah</title>
+    <link rel="stylesheet" href="/simpakUts/static/diagnos.css">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h1>Pilih Gejala</h1>
+            <form action="/submit" method="POST">
+                {% for gejala in gejala_list %}
+                    <div class="gejala-item">
+                        <label for="dropdown_{{ gejala[0] }}">{{ gejala[1] }}</label>
+                        <select id="dropdown_{{ gejala[0] }}" name="cf_user[{{ gejala[0] }}]">
+                            <option value="0.0" selected>Tidak</option>
+                            <option value="0.2">Tidak tahu</option>
+                            <option value="0.4">Sedikit Yakin</option>
+                            <option value="0.6">Cukup Yakin</option>
+                            <option value="0.8">Yakin</option>
+                            <option value="1.0">Sangat Yakin</option>
+                        </select>
+                    </div>
+                {% endfor %}
+                <button type="submit">Submit Diagnosa</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
